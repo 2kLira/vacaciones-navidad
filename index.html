@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#152036">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Ruta de Navidad 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Onest:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: billetes de tren por día, tarjetas ilustradas en rejilla, votación al final */
+:root{
+  --bg:#EEF2F7; --surface:#FFFFFF; --ink:#152036; --muted:#5B6780; --line:#D5DCE7;
+  --berry:#9E1F3F; --gold:#C98A1A; --gold-soft:#F6E7C6; --chip:#E3E9F2;
+  --ok:#2E7D5B; --no:#B4423A;
+  --display:"Young Serif", Georgia, "Times New Roman", serif;
+  --body:"Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1424; --surface:#16203A; --ink:#E8EDF6; --muted:#9AA6BF; --line:#2A3656;
+  --berry:#F27D93; --gold:#F2C25B; --gold-soft:#3A3220; --chip:#1F2B48; --ok:#5FD3A0; --no:#F08A80; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1424; --surface:#16203A; --ink:#E8EDF6; --muted:#9AA6BF; --line:#2A3656;
+  --berry:#F27D93; --gold:#F2C25B; --gold-soft:#3A3220; --chip:#1F2B48; --ok:#5FD3A0; --no:#F08A80; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* Hero */
+.hero{display:grid;gap:18px;padding-block:8px 18px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--berry)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,6vw,58px);line-height:1.02;margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--gold)}
+.lead{max-width:62ch;color:var(--muted);margin:0}
+
+/* Ruta */
+.route{display:flex;gap:0;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:thin}
+.stop{flex:1 0 118px;display:grid;gap:4px;background:none;border:0;padding:0 6px 0 0;text-align:left;cursor:pointer;color:inherit;font:inherit}
+.stop .bar{height:6px;border-radius:3px;background:var(--line);position:relative}
+.stop .bar::after{content:"";position:absolute;left:0;top:50%;width:14px;height:14px;border-radius:50%;transform:translateY(-50%);background:var(--surface);border:3px solid var(--c)}
+.stop.on .bar{background:var(--c)}
+.stop b{font-family:var(--mono);font-size:13px;margin-top:8px}
+.stop span{font-size:13px;color:var(--muted)}
+
+/* Filtros */
+.filters{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 13px;font:600 13px var(--body);cursor:pointer;white-space:nowrap}
+.chip small{font-family:var(--mono);font-weight:500;color:var(--muted);margin-left:4px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip[aria-pressed="true"] small{color:inherit;opacity:.7}
+.chip.vote{border-color:var(--gold);color:var(--gold)}
+.chip.vote[aria-pressed="true"]{background:var(--gold);color:#1b1404}
+
+/* Día */
+.day{margin-top:34px}
+.ticket{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 18px;position:relative}
+.ticket::before,.ticket::after{content:"";position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--bg);border:1px solid var(--line);transform:translateY(-50%)}
+.ticket::before{left:-10px}.ticket::after{right:-10px}
+.date{font-family:var(--display);font-size:40px;line-height:1;color:var(--c)}
+.date small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.tmeta{min-width:0}
+.tmeta h2{font-family:var(--display);font-weight:400;font-size:24px;margin:0;line-height:1.15}
+.tmeta p{margin:2px 0 0;color:var(--muted);font-size:14px}
+.train{font-family:var(--mono);font-size:12px;text-align:right;color:var(--muted);border-left:1px dashed var(--line);padding-left:14px}
+.train b{display:block;font-size:15px;color:var(--ink);letter-spacing:.04em}
+.note{margin:10px 4px 0;font-size:14px;color:var(--muted)}
+.note strong{color:var(--ink)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin-top:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.opt{border:2px dashed var(--gold)}
+.scene{aspect-ratio:16/9;max-width:100%;display:block;width:100%;position:relative}
+.scene svg,.scene img{display:block;width:100%;height:100%}
+.scene img{object-fit:cover;position:absolute;inset:0}
+.up{position:absolute;right:10px;bottom:10px;font:600 12px var(--body);padding:6px 10px;border-radius:8px;background:rgba(10,14,28,.78);color:#fff;cursor:pointer}
+.up:focus-within{outline:2px solid var(--gold)}
+.up-st{left:auto;right:10px;top:10px}
+.links a.tt{background:var(--berry);color:var(--surface);border-color:var(--berry)}
+.flag{position:absolute;left:10px;top:10px;font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:6px;background:rgba(10,14,28,.72);color:#fff}
+.flag.v{background:var(--gold);color:#1b1404}
+.cbody{padding:13px 15px 15px;display:flex;flex-direction:column;gap:8px;flex:1}
+.cbody h3{margin:0;font-size:17px;line-height:1.25;font-weight:700;text-wrap:balance}
+.cbody p{margin:0;color:var(--muted);font-size:14px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font:500 11px var(--mono);background:var(--chip);border-radius:5px;padding:2px 7px;color:var(--muted)}
+.links{display:flex;gap:6px;margin-top:auto;padding-top:4px;flex-wrap:wrap}
+.links a{flex:1 1 auto;text-align:center;text-decoration:none;font:600 13px var(--body);border:1px solid var(--line);border-radius:9px;padding:7px 8px;background:var(--bg)}
+.links a:hover{border-color:var(--c)}
+.links a.v{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tally{font-size:13px;color:var(--gold);font-weight:600}
+
+/* Votación */
+.voting{margin-top:56px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px clamp(16px,3vw,30px)}
+.voting h2{font-family:var(--display);font-weight:400;font-size:clamp(28px,4vw,38px);margin:0 0 6px}
+.who{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 6px}
+.who button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:8px 15px;font:600 14px var(--body);cursor:pointer}
+.who button[aria-pressed="true"]{background:var(--berry);border-color:var(--berry);color:var(--surface)}
+.status{font-size:13px;color:var(--muted);min-height:20px}
+.q{border-top:1px solid var(--line);padding-top:18px;margin-top:18px;display:grid;gap:10px}
+.q h3{margin:0;font-size:17px}
+.q .sub{margin:0;color:var(--muted);font-size:14px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.opt-btn{display:grid;gap:6px;text-align:left;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:11px 13px;cursor:pointer;font:inherit}
+.opt-btn[aria-pressed="true"]{border:2px solid var(--berry);padding:10px 12px}
+.opt-btn b{font-size:15px}
+.meter{height:6px;border-radius:3px;background:var(--chip);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--berry);transition:width .3s}
+.voters{font:500 12px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.filters .who{margin:0 0 4px;align-items:center;gap:6px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
+.filters .who button{flex:0 0 auto;padding:6px 12px;font-size:13px}
+.wl{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);flex:0 0 auto}
+.filters .status{font-size:12px;min-height:0;margin-bottom:6px}
+.yn{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.yn button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:9px;padding:8px;font:700 14px var(--body);cursor:pointer;display:flex;justify-content:center;gap:8px;align-items:center}
+.yn button span{font:600 12px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.yn .yes[aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:var(--surface)}
+.yn .nope[aria-pressed="true"]{background:var(--no);border-color:var(--no);color:var(--surface)}
+.yn button[aria-pressed="true"] span{color:inherit}
+.links .del{flex:0 0 auto;border:1px solid var(--line);background:none;color:var(--muted);border-radius:9px;padding:7px 10px;font:600 13px var(--body);cursor:pointer}
+.summary{display:grid;gap:2px;margin-top:12px}
+.srow{display:grid;grid-template-columns:52px minmax(0,1fr) 120px 82px;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
+.sd{font:500 12px var(--mono);color:var(--muted)}
+.sn em{font-style:normal;font:600 11px var(--mono);color:var(--gold);margin-left:4px}
+.sbar{display:flex;height:8px;border-radius:4px;background:var(--chip);overflow:hidden}
+.sbar .s{background:var(--ok)}.sbar .n{background:var(--no)}
+.sc{font:500 12px var(--mono);color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.sg{display:grid;gap:6px;max-width:560px}
+.sg label{font-weight:600;font-size:14px;margin-top:6px}
+.sg input,.sg select,.sg textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+.sg button{margin-top:8px;justify-self:start;border:0;background:var(--berry);color:var(--surface);font:700 15px var(--body);padding:11px 18px;border-radius:10px;cursor:pointer}
+.sg button:disabled{opacity:.45;cursor:not-allowed}
+@media (max-width:560px){.srow{grid-template-columns:44px minmax(0,1fr) 70px}.sbar{display:none}}
+.sendbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--ink);color:var(--bg);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.sendin{max-width:1120px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between}
+#send-n{font-weight:600;font-size:14px}
+.sendbtns{display:flex;gap:8px}
+.sendbar .wa{background:#25D366;color:#06301A;text-decoration:none;font:700 14px var(--body);padding:9px 14px;border-radius:10px}
+.sendbar button{background:none;border:1px solid currentColor;color:inherit;font:600 14px var(--body);padding:8px 12px;border-radius:10px;cursor:pointer}
+#send-text{width:100%;font:12px var(--mono);border-radius:8px;padding:8px}
+.wrap{padding-bottom:120px}
+.foot{margin-top:40px;color:var(--muted);font-size:13px}
+@media (max-width:560px){
+  .ticket{grid-template-columns:auto 1fr}
+  .train{grid-column:1/-1;text-align:left;border-left:0;border-top:1px dashed var(--line);padding:10px 0 0}
+  .date{font-size:34px}
+}
+@media (prefers-reduced-motion:reduce){.meter i{transition:none}}
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">17 → 27 dic 2026 · 5 viajeros · 4 países</div>
+    <h1>Ruta de Navidad <em>2026</em></h1>
+    <p class="lead">Ámsterdam, Colonia, Luxemburgo, Bruselas, Brujas y Gante. Toca una ciudad o un día para filtrar, abre fotos y videos de cada lugar, y vota sí o no en cada tarjeta. Abajo puedes sugerir actividades nuevas. Cuando termines, mándale tus votos a Memo por WhatsApp.</p>
+    <nav class="route" id="route" aria-label="Ciudades de la ruta"></nav>
+  </header>
+
+  <div class="filters"><div class="who" id="who" role="group" aria-label="¿Quién vota?"></div><div class="status" id="status" role="status"></div><div class="chips" id="chips" role="toolbar" aria-label="Filtrar por día"></div></div>
+
+  <main id="days"></main>
+
+  <section class="voting" id="votar">
+    <div class="eyebrow">Votación familiar</div>
+    <h2>¿Qué decidimos?</h2>
+    <p class="lead">Así va la votación, ordenada de lo que más gusta a lo que menos. Incluye los votos que ya le llegaron a Memo y los tuyos.</p>
+    <p class="sub" id="who-done"></p>
+    <div class="summary" id="summary"></div>
+    <div class="q">
+      <h3>Sugiere una actividad</h3>
+      <p class="sub">Aparece como tarjeta en el día que elijas. Cuando se la mandes a Memo, todos la podrán votar.</p>
+      <form id="sg-form" class="sg">
+        <label for="sg-name">¿Qué quieres hacer?</label>
+        <input id="sg-name" maxlength="90" placeholder="Ej. Comer stroopwafels en Albert Cuyp" autocomplete="off">
+        <label for="sg-day">¿Qué día?</label>
+        <select id="sg-day"></select>
+        <label for="sg-note">¿Por qué? (opcional)</label>
+        <textarea id="sg-note" maxlength="240" rows="2" placeholder="Lo vi en TikTok y se ve increíble"></textarea>
+        <button id="sg-submit" type="submit">Agregar sugerencia</button>
+        <p class="sub" id="sg-msg" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <div class="sendbar" id="sendbar" hidden><div class="sendin"><span id="send-n"></span><div class="sendbtns"><a id="send-wa" class="wa" href="https://wa.me/" target="_blank" rel="noopener">Mandar por WhatsApp</a><button id="send-copy" type="button">Copiar</button></div><textarea id="send-text" rows="3" hidden aria-label="Mensaje para copiar"></textarea></div></div>
+  <p class="foot">Horarios de mercados y trenes revisados a noviembre de 2026; conviene confirmar los del 24 y 25 de diciembre una semana antes.</p>
+</div>
+
+<script src="config.js"></script>
+<script>
+const CITIES={
+  ams:{name:"Ámsterdam",code:"AMS",c:"#1E7A8C",h:190},
+  cgn:{name:"Colonia",code:"CGN",c:"#B23A48",h:350},
+  lux:{name:"Luxemburgo",code:"LUX",c:"#3E8E5A",h:140},
+  bru:{name:"Bruselas",code:"BRU",c:"#C98A1A",h:40},
+  brg:{name:"Brujas",code:"BRG",c:"#6A4FB3",h:265},
+  gnt:{name:"Gante",code:"GNT",c:"#2F6FB8",h:215},
+};
+const DAYS=[
+ {d:17,wd:"Jueves",city:"ams",title:"Pista, mercados y luces",train:null,note:"Llegada a Ámsterdam. Reservar el barco del Light Festival con anticipación."},
+ {d:18,wd:"Viernes",city:"ams",title:"Centro y mundos de invierno",train:null,note:"Viernes: la Fabrique des Lumières abre hasta las 21:00, buena opción para la noche."},
+ {d:19,wd:"Sábado",city:"cgn",title:"Catedral y Altstadt",train:["AMS","CGN","≈ 2h40 en ICE"],note:"Los mercados de la Catedral y de los Ángeles cierran el 23, así que llegamos a tiempo."},
+ {d:20,wd:"Domingo",city:"cgn",title:"Chocolate, Rin y miradores",train:null,note:null},
+ {d:21,wd:"Lunes",city:"lux",title:"Ciudad Alta y mercados",train:["CGN","LUX","≈ 3h a 3h30 con transbordo"],note:"En Luxemburgo el transporte público es gratis."},
+ {d:22,wd:"Martes",city:"lux",title:"Fortaleza, Grund y aventura",train:null,note:"<strong>En votación:</strong> la mañana es para Schengen, Mullerthal o Belval."},
+ {d:23,wd:"Miércoles",city:"bru",title:"Bruselas en un día",train:["LUX","BRU","≈ 3h en tren"],note:"Atomium solo por fuera para que alcance el día."},
+ {d:24,wd:"Jueves",city:"brg",title:"Nochebuena en Brujas",train:["BRU","BRG","≈ 1h en tren"],note:"<strong>Reservar ya</strong> la cena de Nochebuena. Los mercados cierran temprano este día."},
+ {d:25,wd:"Viernes",city:"gnt",title:"Navidad en Gante",train:["BRG","GNT","≈ 30 min · horario de festivo"],note:"El mercado abre a mediodía el 25. Mejor ir en la tarde. Regreso a dormir a Brujas."},
+ {d:26,wd:"Sábado",city:"ams",title:"Día libre, por si acaso",train:["BRG","AMS","≈ 3h en tren"],note:"Día para descansar. Dormir cerca de Centraal o Schiphol."},
+ {d:27,wd:"Domingo",city:"ams",title:"Regreso a casa",train:["AMS","OAX","vía Houston · 10:20"],note:"Estar en Schiphol a las 7:20. Es domingo y hay menos trenes."},
+];
+// kind: escena ilustrada · time: dia | tarde | noche
+const ITEMS=[
+ {id:"museumplein",d:17,n:"Pista de hielo en Museumplein",k:"hielo",t:"tarde",tags:["Divertido","Al aire libre"],p:"Para arrancar el viaje patinando enfrente del Rijksmuseum. Nadie tiene que saber patinar bien, el chiste es reírnos y luego un chocolate caliente.",q:"Museumplein ice rink Amsterdam"},
+ {id:"xmasvillage",d:17,n:"Christmas Village Amsterdam",k:"mercado",t:"noche",tags:["Mercado"],p:"Primera noche tranqui. Caminar entre casitas de madera, probar algo de comer y entrar en modo Navidad.",q:"Christmas Village Amsterdam"},
+ {id:"negen",d:17,n:"De Negen Straatjes",k:"calle",t:"tarde",tags:["Tiendas","Canales"],p:"Nueve calles chiquitas entre canales, llenas de tiendas bonitas y cafés. Ideal para perdernos un rato sin plan.",q:"De Negen Straatjes Amsterdam Christmas"},
+ {id:"lightfest",d:17,n:"Amsterdam Light Festival en barco",k:"canal",t:"noche",tags:["Luces","Barco"],p:"Paseo en barco de noche por los canales viendo obras de luz gigantes. De las cosas más bonitas que tiene Ámsterdam en diciembre.",q:"Amsterdam Light Festival boat"},
+ {id:"dam",d:18,n:"Dam Square y De Bijenkorf",k:"plaza",t:"dia",tags:["Tiendas","Centro"],p:"La plaza principal y el Bijenkorf, que pone los aparadores navideños más espectaculares. Aquí se nos va a ir el dinero.",q:"De Bijenkorf Amsterdam Christmas windows"},
+ {id:"fabrique",d:18,n:"Fabrique des Lumières",k:"inmersivo",t:"noche",tags:["Inmersivo","Bajo techo"],p:"Una fábrica vieja donde proyectan cuadros de Van Gogh y otros en paredes y piso. Te sientes dentro de la pintura. El viernes abre hasta las 9.",q:"Fabrique des Lumieres Amsterdam"},
+ {id:"winterparadijs",d:18,n:"Het Amsterdamse Winterparadijs",k:"feria",t:"noche",tags:["Divertido","Bajo techo"],p:"Una feria de invierno enorme bajo techo: patinaje, tobogán de nieve, shows y un pueblito tipo après-ski. Plan perfecto si llueve.",q:"Het Amsterdamse Winterparadijs RAI"},
+ {id:"dom",d:19,n:"Catedral de Colonia",k:"catedral",t:"dia",tags:["Imperdible"],p:"La catedral que sale en todas las fotos de Colonia. Por dentro impresiona, y el que se anime sube los 533 escalones de la torre.",q:"Cologne Cathedral"},
+ {id:"ehren",d:19,n:"Ehrenstraße y Belgisches Viertel",k:"calle",t:"dia",tags:["Diseño","Cafés"],p:"El barrio cool de Colonia. Tiendas de diseño, ropa y cafecitos, buen plan para Andrea y Chase mientras los demás descansan.",q:"Belgisches Viertel Köln"},
+ {id:"domxmas",d:19,n:"Mercado navideño de la Catedral",k:"mercado",t:"tarde",tags:["Mercado"],p:"El mercado más famoso de Colonia, justo abajo de la catedral con un árbol gigante. Aquí toca el primer Glühwein alemán.",q:"Weihnachtsmarkt am Kölner Dom"},
+ {id:"altstadt",d:19,n:"Altstadt y Alter Markt",k:"plaza",t:"tarde",tags:["Centro histórico"],p:"Las casitas de colores junto al río y las plazas del centro viejo. Para caminar sin prisa.",q:"Köln Altstadt Alter Markt"},
+ {id:"heinzels",d:19,n:"Heinzels Wintermärchen",k:"mercado",t:"noche",tags:["Mercado","Pista de hielo"],p:"El mercado de los duendes, con una pista de hielo larguísima que da vueltas por la plaza. Muy de cuento.",q:"Heinzels Wintermärchen Köln"},
+ {id:"brauhaus",d:19,n:"Cena en una brauhaus",k:"comida",t:"noche",tags:["Comida típica"],opt:"brauhaus",p:"Cena de cervecería alemana de verdad. Te traen Kölsch en vasitos y no dejan de llenarlos hasta que tapas el vaso con el posavasos.",q:"Früh am Dom Brauhaus Köln"},
+ {id:"choco",d:20,n:"Museo del Chocolate",k:"choco",t:"dia",tags:["Dulce","Bajo techo"],p:"Museo del Chocolate con fuente de chocolate y degustación. Sí, hay que ir.",q:"Schokoladenmuseum Köln"},
+ {id:"hafen",d:20,n:"Hafen-Weihnachtsmarkt",k:"mercado",t:"tarde",tags:["Mercado","Río"],p:"Mercado navideño junto al puerto con onda marinera, pegado al museo del chocolate. Combina perfecto.",q:"Hafen Weihnachtsmarkt Köln"},
+ {id:"rin",d:20,n:"Paseo por el Rin y Groß St. Martin",k:"rio",t:"tarde",tags:["Paseo"],p:"Caminar por la orilla del Rin con la torre de Groß St. Martin. Buen momento para bajarle al ritmo.",q:"Groß St. Martin Rhein Köln"},
+ {id:"hohenzollern",d:20,n:"Puente Hohenzollern",k:"puente",t:"tarde",tags:["Foto"],p:"El puente de los candados del amor con la catedral de fondo. Foto familiar obligada, sobre todo cuando ya oscurece.",q:"Hohenzollernbrücke Köln"},
+ {id:"triangle",d:20,n:"KölnTriangle",k:"mirador",t:"noche",tags:["Mirador"],p:"Una terraza a 100 metros con la mejor vista de la catedral iluminada. Rápido, barato y espectacular.",q:"KölnTriangle Aussichtsplattform"},
+ {id:"engel",d:20,n:"Markt der Engel",k:"mercado",t:"noche",tags:["Mercado"],p:"Mercado con cientos de estrellitas colgando y gente vestida de ángel regalando cositas. Es de los más bonitos.",q:"Markt der Engel Neumarkt Köln"},
+ {id:"oberstadt",d:21,n:"Ciudad Alta y Palacio Gran Ducal",k:"palacio",t:"dia",tags:["Centro histórico"],p:"El centro de la capital, con el palacio donde trabaja el Gran Duque. Luxemburgo es chiquito y se camina muy fácil.",q:"Grand Ducal Palace Luxembourg"},
+ {id:"philippe",d:21,n:"Rue Philippe II y Grand-Rue",k:"calle",t:"dia",tags:["Tiendas de lujo"],p:"Las calles de las tiendas de diseñador. Aunque sea para ver aparadores, están muy bonitas.",q:"Grand-Rue Luxembourg shopping"},
+ {id:"armes",d:21,n:"Chrëschtmaart en Place d'Armes",k:"mercado",t:"tarde",tags:["Mercado"],p:"El mercado navideño tradicional en la plaza principal. Para probar comida de Luxemburgo.",q:"Place d'Armes Luxembourg Christmas market"},
+ {id:"wantermaart",d:21,n:"Wantermaart",k:"feria",t:"noche",tags:["Noria","Divertido"],p:"Mercado con rueda de la fortuna asomada al valle. La vista desde arriba de noche vale mucho la pena.",q:"Winterlights Place de la Constitution Luxembourg"},
+ {id:"mudam",d:21,n:"Mudam y Fort Thüngen",k:"museo",t:"dia",tags:["Arte moderno"],opt:"mudam",p:"Museo de arte moderno con un edificio increíble, pegado a una fortaleza vieja. Opcional, para los que les guste.",q:"Mudam Luxembourg Fort Thungen"},
+ {id:"schengen",d:22,n:"Schengen: tres países a pie",k:"trespaises",t:"dia",tags:["Solo aquí"],vote:"lux22",p:"El pueblito donde se firmó el acuerdo que quitó las fronteras de Europa. Caminando 15 minutos pisas Luxemburgo, Alemania y Francia.",q:"Schengen tripoint Luxembourg"},
+ {id:"mullerthal",d:22,n:"Mullerthal, la Pequeña Suiza",k:"naturaleza",t:"dia",tags:["Aventura"],vote:"lux22",p:"La Pequeña Suiza de Luxemburgo: bosque, una cascada con puente de piedra y una grieta entre rocas por la que se camina. Más aventurero.",q:"Mullerthal Schiessentümpel"},
+ {id:"belval",d:22,n:"Alto horno de Belval",k:"industrial",t:"dia",tags:["Mirador 40 m"],vote:"lux22",p:"Una planta de acero vieja a la que puedes subir hasta 40 metros, rodeada de edificios modernos. Cierra los martes, así que sería el 21.",q:"Belval blast furnace"},
+ {id:"bock",d:22,n:"Casamatas del Bock",k:"fortaleza",t:"dia",tags:["Túneles"],p:"Túneles y pasadizos excavados en la roca debajo de la ciudad. Se siente muy de película.",q:"Bock Casemates Luxembourg"},
+ {id:"corniche",d:22,n:"Chemin de la Corniche",k:"mirador",t:"tarde",tags:["Mirador"],p:"Le dicen el balcón más bonito de Europa. Un paseo corto con vista a todo el valle.",q:"Chemin de la Corniche Luxembourg"},
+ {id:"grund",d:22,n:"Barrio de Grund",k:"rio",t:"tarde",tags:["Paseo"],p:"El barrio de abajo, junto al río, con puentes de piedra y casitas viejas. Muy tranquilo y muy fotogénico.",q:"Grund Luxembourg"},
+ {id:"pfaffenthal",d:22,n:"Elevador de Pfaffenthal",k:"mirador",t:"tarde",tags:["Gratis","Vista"],p:"Un elevador de vidrio gratis que baja al valle. Tiene piso transparente, para quien se atreva a mirar.",q:"Pfaffenthal panoramic elevator"},
+ {id:"wanterpark",d:22,n:"Wanterpark y Winterlights",k:"hielo",t:"noche",tags:["Divertido","Pista"],p:"Pista de hielo, música y ambiente para cerrar Luxemburgo con todo.",q:"Winterlights Luxembourg Kinnekswiss"},
+ {id:"atomium",d:23,n:"Atomium por fuera",k:"atomium",t:"dia",tags:["Foto"],p:"Bajamos del metro, foto con este átomo gigante de 102 metros y de regreso al centro. Rápido, para que nos alcance el día.",q:"Atomium Brussels"},
+ {id:"montarts",d:23,n:"Mont des Arts y Barrio Real",k:"mirador",t:"dia",tags:["Vista"],p:"Jardines en escalones con una vista muy bonita del centro de Bruselas.",q:"Mont des Arts Brussels"},
+ {id:"hubert",d:23,n:"Galeries Royales Saint-Hubert",k:"galeria",t:"dia",tags:["Chocolate","Tiendas"],p:"Un pasaje techado antiguo lleno de chocolaterías. Aquí sí hay que comprar chocolates para la casa.",q:"Galeries Royales Saint-Hubert"},
+ {id:"grandplace",d:23,n:"Grand-Place y centro histórico",k:"plaza",t:"dia",tags:["Imperdible"],p:"Para muchos la plaza más bonita de Europa. Todo dorado, hay que verla de día y de noche.",q:"Grand-Place Brussels"},
+ {id:"mannekenpis",d:23,n:"Manneken Pis",k:"estatua",t:"tarde",tags:["Rápido"],p:"La estatuita más famosa de Bruselas. Es chiquita y a veces la visten con algún disfraz, es de pasada.",q:"Manneken Pis costume"},
+ {id:"beerworld",d:23,n:"Belgian Beer World",k:"cerveza",t:"tarde",tags:["Interactivo","Degustación"],p:"Experiencia interactiva sobre la cerveza belga, con degustación al final. Está en pleno centro, no hay que moverse.",q:"Belgian Beer World Bourse Brussels"},
+ {id:"lightshow",d:23,n:"Grand-Place iluminada",k:"luces",t:"noche",tags:["Show de luces"],p:"En la noche la Grand-Place se ilumina con un show de luces y música. Hay que buscar buen lugar.",q:"Grand-Place Brussels Christmas light show"},
+ {id:"winterwonders",d:23,n:"Winter Wonders",k:"feria",t:"noche",tags:["Mercado","Noria"],p:"Mercados, rueda de la fortuna y atracciones repartidos por el centro. Para cerrar Bruselas.",q:"Winter Wonders Brussels"},
+ {id:"markt",d:24,n:"Markt y campanario",k:"campanario",t:"dia",tags:["Centro histórico"],p:"La plaza de las casitas de colores y el campanario. Es la postal de Brujas.",q:"Markt Brugge belfry"},
+ {id:"burg",d:24,n:"Plaza Burg y Ayuntamiento",k:"plaza",t:"dia",tags:["Gótico"],p:"Una plaza chiquita con uno de los ayuntamientos góticos más bonitos. Está a dos pasos del Markt.",q:"Burg square Bruges"},
+ {id:"rozen",d:24,n:"Rozenhoedkaai",k:"canal",t:"tarde",tags:["Foto"],p:"El rincón más fotografiado de Brujas: canal, casas viejas y el campanario atrás. Foto familiar obligada.",q:"Rozenhoedkaai Bruges"},
+ {id:"winterglow",d:24,n:"Winter Glow",k:"luces",t:"tarde",tags:["Mercado","Luces"],p:"Luces y mercados navideños por todo el centro. El 24 cierran temprano, hay que ir con tiempo.",q:"Winter Glow Bruges"},
+ {id:"cena24",d:24,n:"Cena de Nochebuena",k:"comida",t:"noche",tags:["Reservar ya"],p:"Nuestra cena de Nochebuena en familia. Hay que reservar ya porque muchos lugares cierran ese día.",q:"Bruges restaurant Christmas Eve"},
+ {id:"nightwalk",d:24,n:"Paseo nocturno",k:"canal",t:"noche",tags:["Tranquilo"],p:"Después de cenar, caminar Brujas iluminada cuando ya no hay nadie. De esos momentos que se quedan.",q:"Bruges at night Christmas"},
+ {id:"boat",d:24,n:"Paseo en barco por canales",k:"canal",t:"dia",tags:["Barco"],opt:"barco",p:"Media hora en lancha por los canales viendo Brujas desde el agua. Tranqui y muy bonito.",q:"Bruges canal boat tour"},
+ {id:"waffles",d:24,n:"Taller de waffles belgas",k:"comida",t:"dia",tags:["Taller","Divertido"],opt:"waffles",p:"Taller para hacer nuestros propios waffles belgas y luego comérnoslos. Puro cotorreo.",q:"Bruges waffle workshop"},
+ {id:"gravensteen",d:25,n:"Castillo de los Condes",k:"castillo",t:"tarde",tags:["Por fuera"],p:"Un castillo medieval de verdad, con foso, en pleno centro de Gante. Por fuera ya impresiona.",q:"Gravensteen Ghent"},
+ {id:"graslei",d:25,n:"Graslei y Korenlei",k:"canal",t:"tarde",tags:["Canales"],p:"Dos muelles medievales uno frente al otro. Para mí, lo más bonito de Gante.",q:"Graslei Korenlei Ghent"},
+ {id:"michiel",d:25,n:"Puente de San Miguel",k:"puente",t:"tarde",tags:["Foto"],p:"Desde este puente se ven las tres torres de Gante en fila. La mejor vista de la ciudad.",q:"Sint-Michielsbrug Ghent view"},
+ {id:"bavo",d:25,n:"Catedral de San Bavón",k:"catedral",t:"tarde",tags:["Centro histórico"],p:"La catedral donde está el famoso retablo del Cordero Místico. El 25 hay misas, por si alguien quiere ir.",q:"Saint Bavo Cathedral Ghent"},
+ {id:"belfortg",d:25,n:"Campanario de Gante",k:"campanario",t:"tarde",tags:["Vista"],p:"Torre medieval con un dragón dorado en la punta. Se sube y se ve todo Gante.",q:"Belfry of Ghent"},
+ {id:"winterfeesten",d:25,n:"Gentse Winterfeesten",k:"feria",t:"noche",tags:["Mercado","Pista"],p:"Más de 150 casitas, pista de hielo y rueda de la fortuna. El 25 abre a mediodía, por eso vamos en la tarde.",q:"Gentse Winterfeesten"},
+ {id:"jordaan",d:26,n:"Jordaan",k:"canal",t:"dia",tags:["Tranquilo"],p:"Día de bajarle. Caminar los canales del Jordaan, entrar a un café y no hacer nada más.",q:"Jordaan Amsterdam winter"},
+ {id:"hortus",d:26,n:"Hortus Botanicus",k:"jardin",t:"dia",tags:["Invernaderos"],p:"Uno de los jardines botánicos más antiguos del mundo, con invernaderos calientitos. Plan tranquilo de día.",q:"Hortus Botanicus Amsterdam"},
+ {id:"foodhallen",d:26,n:"Foodhallen",k:"comida",t:"noche",tags:["Comida"],p:"Una cochera de tranvías convertida en mercado de comida. Cada quien elige lo que se le antoje, ideal para la última cena.",q:"Foodhallen Amsterdam"},
+ {id:"vuelo",d:27,n:"Vuelo Ámsterdam · Houston · Oaxaca",k:"avion",t:"dia",tags:["10:20"],p:"De regreso a Oaxaca. Hay que estar en Schiphol a las 7:20.",q:"Schiphol airport"},
+];
+const QUESTIONS=[
+ {id:"lux22",type:"one",title:"Luxemburgo, mañana del 22",sub:"Algo que solo existe en Luxemburgo.",opts:[["schengen","Schengen","Tres países caminando"],["mullerthal","Mullerthal","Cascada y grietas entre rocas"],["belval","Belval","Alto horno de 40 m, se movería al 21"]]},
+ {id:"mudam",type:"yn",title:"Mudam y Fort Thüngen",sub:"Opcional en Luxemburgo, día 21."},
+ {id:"brauhaus",type:"yn",title:"Cena en brauhaus en Colonia",sub:"Noche del 19, en la Altstadt."},
+ {id:"barco",type:"yn",title:"Paseo en barco por los canales de Brujas",sub:"Día 24."},
+ {id:"waffles",type:"yn",title:"Taller de waffles belgas",sub:"Día 24 en Brujas."},
+];
+const FAMILY=[["papa","Guillermo"],["mama","Paty"],["hermana","Andrea (Pedo)"],["hermano","Chase"],["memo","Memo"]];
+
+/* ---------- ilustraciones ---------- */
+function rng(seed){let h=2166136261;for(const ch of seed)h=Math.imul(h^ch.charCodeAt(0),16777619);return()=>{h=Math.imul(h^h>>>15,2246822507);h=Math.imul(h^h>>>13,3266489909);return((h^=h>>>16)>>>0)/4294967296}}
+function hsl(h,s,l){return `hsl(${h} ${s}% ${l}%)`}
+function scene(it){
+  const city=CITIES[DAYS.find(x=>x.d===it.d).city], r=rng(it.id), H=city.h, W=320, Ht=180;
+  const sky={dia:[hsl(H,45,72),hsl(H,35,88)],tarde:[hsl((H+330)%360,50,45),hsl(30,75,70)],noche:[hsl(230,45,12),hsl(H,40,26)]}[it.t];
+  const night=it.t==="noche", dark=night?hsl(230,40,8):hsl(H,30,22), mid=night?hsl(H,30,18):hsl(H,25,38);
+  let s=`<defs><linearGradient id="g${it.id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sky[0]}"/><stop offset="1" stop-color="${sky[1]}"/></linearGradient></defs><rect width="${W}" height="${Ht}" fill="url(#g${it.id})"/>`;
+  if(night)for(let i=0;i<30;i++)s+=`<circle cx="${r()*W}" cy="${r()*90}" r="${r()*1.2+.3}" fill="#fff" opacity="${r()*.7+.2}"/>`;
+  else s+=`<circle cx="${60+r()*200}" cy="${30+r()*20}" r="${16+r()*8}" fill="${it.t==="tarde"?"#FFD38A":"#FFF6DA"}" opacity=".9"/>`;
+  // fila de casas con gablete de fondo
+  const houses=(y,col,win)=>{let x=-10,o="";while(x<W){const w=18+r()*16,h=40+r()*40;o+=`<path d="M${x} ${y} V${y-h} L${x+w/2} ${y-h-10-r()*8} L${x+w} ${y-h} V${y} Z" fill="${col}"/>`;if(win)for(let j=0;j<3;j++)o+=`<rect x="${x+4+r()*(w-10)}" y="${y-h+6+r()*(h-16)}" width="3.5" height="5" fill="#FFD27A" opacity="${night?.95:.0}"/>`;x+=w+1}return o};
+  const water=(y)=>{let o=`<rect y="${y}" width="${W}" height="${Ht-y}" fill="${night?hsl(H,45,14):hsl(H,40,45)}"/>`;for(let i=0;i<14;i++)o+=`<rect x="${r()*W}" y="${y+6+r()*(Ht-y-10)}" width="${10+r()*30}" height="1.4" fill="${night?"#FFD27A":"#fff"}" opacity="${night?.6:.35}"/>`;return o};
+  const ground=(y,c)=>`<rect y="${y}" width="${W}" height="${Ht-y}" fill="${c}"/>`;
+  const lights=(y)=>{let o="";for(let i=0;i<22;i++){const x=i*15+4;o+=`<circle cx="${x}" cy="${y+Math.sin(i/1.6)*5}" r="2.2" fill="${["#FFD27A","#FF8FA3","#9FE3FF"][i%3]}"/>`}return o};
+  const k=it.k;
+  if(["canal","calle","rio"].includes(k)){s+=houses(118,mid,true)+houses(130,dark,true)+(k==="calle"?ground(130,dark)+lights(60):water(130))}
+  else if(k==="mercado"){s+=houses(120,mid,true)+ground(120,dark)+lights(70);for(let i=0;i<5;i++){const x=12+i*62;s+=`<path d="M${x} 150 V122 L${x+25} 104 L${x+50} 122 V150 Z" fill="${hsl(25,45,night?28:42)}"/><path d="M${x-3} 124 L${x+25} 102 L${x+53} 124" stroke="#fff" stroke-width="3" fill="none"/><rect x="${x+8}" y="128" width="34" height="12" fill="#FFD27A" opacity=".85"/>`}}
+  else if(k==="hielo"){s+=houses(110,mid,true)+ground(110,dark)+`<ellipse cx="160" cy="148" rx="150" ry="24" fill="${night?"#9CC9E6":"#DDF1FF"}" opacity=".9"/>`+lights(55);for(let i=0;i<6;i++){const x=40+r()*240,y=138+r()*18;s+=`<circle cx="${x}" cy="${y-14}" r="3.5" fill="${dark}"/><rect x="${x-2.5}" y="${y-11}" width="5" height="11" rx="2" fill="${["#B23A48","#2F6FB8","#3E8E5A"][i%3]}"/>`}}
+  else if(["catedral","campanario","palacio","castillo"].includes(k)){s+=houses(150,mid,true);const cx=160;if(k==="catedral"){for(const dx of[-26,26])s+=`<path d="M${cx+dx-14} 150 V55 L${cx+dx} 8 L${cx+dx+14} 55 V150 Z" fill="${dark}"/>`;s+=`<rect x="${cx-40}" y="80" width="80" height="70" fill="${dark}"/><circle cx="${cx}" cy="100" r="9" fill="#FFD27A" opacity="${night?.9:.4}"/>`}else if(k==="campanario"){s+=`<rect x="${cx-18}" y="40" width="36" height="110" fill="${dark}"/><rect x="${cx-12}" y="18" width="24" height="24" fill="${dark}"/><path d="M${cx-8} 18 L${cx} 4 L${cx+8} 18Z" fill="${dark}"/><circle cx="${cx}" cy="62" r="7" fill="#FFF3D0" opacity=".85"/>`}else{s+=`<rect x="${cx-70}" y="80" width="140" height="70" fill="${dark}"/>`;for(let i=0;i<8;i++)s+=`<rect x="${cx-70+i*18}" y="72" width="10" height="10" fill="${dark}"/>`;s+=`<rect x="${cx-12}" y="50" width="24" height="40" fill="${dark}"/>`;for(let i=0;i<6;i++)s+=`<rect x="${cx-60+i*22}" y="100" width="6" height="12" fill="#FFD27A" opacity="${night?.9:.5}"/>`}s+=ground(150,dark)}
+  else if(k==="plaza"){s+=houses(150,dark,true)+ground(150,mid);for(let i=0;i<9;i++)s+=`<rect x="${10+i*34}" y="${150-50-r()*30}" width="2" height="0" />`;s+=`<path d="M150 150 V40 L160 20 L170 40 V150Z" fill="${dark}"/>`+lights(48)}
+  else if(k==="puente"){s+=houses(110,mid,true)+water(130)+`<path d="M0 118 H320 V126 H0Z" fill="${dark}"/>`;for(let i=0;i<4;i++){const x=i*85;s+=`<path d="M${x} 126 Q${x+42} 92 ${x+85} 126" stroke="${dark}" stroke-width="5" fill="none"/>`}s+=`<path d="M232 118 V40 L240 18 L248 40 V118Z M252 118 V40 L260 18 L268 40 V118Z" fill="${dark}" opacity=".85"/>`}
+  else if(k==="mirador"){s+=houses(140,mid,true)+houses(150,dark,true)+ground(150,dark)+`<path d="M0 110 H140 V116 H0Z" fill="${night?"#2a3550":"#fff"}" opacity=".6"/>`;for(let i=0;i<3;i++)s+=`<circle cx="${30+i*36}" cy="96" r="5" fill="${dark}"/><rect x="${26+i*36}" y="100" width="8" height="12" fill="${dark}"/>`}
+  else if(k==="inmersivo"){s+=`<rect width="${W}" height="${Ht}" fill="#14102a"/>`;for(let i=0;i<14;i++)s+=`<circle cx="${r()*W}" cy="${r()*Ht}" r="${18+r()*40}" fill="${hsl(r()*360,80,60)}" opacity=".35"/>`;s+=`<path d="M0 150 H320 V180 H0Z" fill="#0b0918"/>`;for(let i=0;i<4;i++)s+=`<rect x="${70+i*50}" y="128" width="8" height="22" rx="3" fill="#0b0918"/><circle cx="${74+i*50}" cy="124" r="5" fill="#0b0918"/>`}
+  else if(k==="feria"){s+=houses(130,mid,true)+ground(130,dark)+`<circle cx="230" cy="80" r="52" fill="none" stroke="#FFD27A" stroke-width="3"/>`;for(let i=0;i<12;i++){const a=i*Math.PI/6;s+=`<line x1="230" y1="80" x2="${230+52*Math.cos(a)}" y2="${80+52*Math.sin(a)}" stroke="#FFD27A" stroke-width="1.2" opacity=".7"/><circle cx="${230+52*Math.cos(a)}" cy="${80+52*Math.sin(a)}" r="5" fill="${["#FF8FA3","#9FE3FF","#FFD27A"][i%3]}"/>`}s+=`<path d="M215 132 L230 80 L245 132" stroke="${dark}" stroke-width="5" fill="none"/>`+lights(52)}
+  else if(k==="choco"){s+=ground(110,hsl(25,40,30))+`<path d="M0 110 Q80 90 160 110 T320 110 V180 H0Z" fill="hsl(22 45% 24%)"/>`;for(let i=0;i<5;i++)s+=`<rect x="${30+i*58}" y="${120+r()*20}" width="40" height="26" rx="3" fill="hsl(20 40% ${18+r()*10}%)" stroke="hsl(22 40% 34%)"/>`;s+=`<path d="M160 20 C150 60 170 70 160 110" stroke="hsl(24 50% 30%)" stroke-width="12" fill="none"/>`}
+  else if(k==="comida"){s+=ground(115,night?hsl(25,30,18):hsl(30,30,55))+`<ellipse cx="160" cy="135" rx="120" ry="20" fill="${night?"#2b2235":"#fff"}" opacity=".85"/>`;const icons=["#C98A1A","#B23A48","#E9C46A","#7A4A2A"];for(let i=0;i<4;i++)s+=`<circle cx="${85+i*50}" cy="128" r="16" fill="${icons[i]}"/><circle cx="${85+i*50}" cy="128" r="9" fill="#fff" opacity=".25"/>`;s+=lights(40)}
+  else if(k==="cerveza"){s+=houses(150,dark,true)+ground(150,dark);for(let i=0;i<5;i++){const x=40+i*52,h=60+r()*20;s+=`<rect x="${x}" y="${150-h}" width="30" height="${h}" rx="4" fill="#E2A529" opacity=".95"/><rect x="${x}" y="${150-h-8}" width="30" height="12" rx="5" fill="#FFF6E0"/>`}}
+  else if(k==="trespaises"){s+=`<path d="M0 110 Q90 80 170 105 T320 90 V180 H0Z" fill="${hsl(110,30,40)}"/>`+water(140);const fl=[["#00A3E0","#fff","#ED2939"],["#000","#DD0000","#FFCE00"],["#0055A4","#fff","#EF4135"]];[[70,0],[160,1],[250,2]].forEach(([x,f])=>{s+=`<rect x="${x}" y="58" width="2" height="54" fill="${dark}"/>`;fl[f].forEach((c,j)=>{s+=f===1?`<rect x="${x+2}" y="${58+j*8}" width="34" height="8" fill="${c}"/>`:`<rect x="${x+2+j*11.3}" y="58" width="11.3" height="24" fill="${c}"/>`})});if(1)s+=`<rect x="70" y="58" width="0" height="0"/>`}
+  else if(k==="naturaleza"){s+=`<path d="M0 180 V60 Q40 40 70 70 Q110 30 140 80 V180Z" fill="${hsl(30,25,40)}"/><path d="M200 180 V70 Q240 40 270 60 Q300 40 320 70 V180Z" fill="${hsl(30,25,35)}"/>`+water(150)+`<rect x="150" y="80" width="40" height="72" fill="#DFF3FF" opacity=".75"/><path d="M120 118 Q170 92 220 118 V126 H120Z" fill="${hsl(30,15,55)}"/>`;for(let i=0;i<8;i++)s+=`<path d="M${r()*W} ${60+r()*40} l8 22 h-16Z" fill="${hsl(140,35,26)}"/>`}
+  else if(k==="industrial"){s+=ground(150,dark)+`<rect x="120" y="40" width="60" height="110" fill="${hsl(20,30,30)}"/><rect x="100" y="30" width="100" height="10" fill="${hsl(20,25,24)}"/><rect x="190" y="20" width="12" height="130" fill="${hsl(20,25,24)}"/><rect x="40" y="100" width="70" height="50" fill="${mid}"/><rect x="220" y="80" width="80" height="70" fill="#9FD3E8" opacity=".6"/>`}
+  else if(k==="fortaleza"){s+=`<path d="M0 180 V70 L60 60 L120 80 L200 60 L320 75 V180Z" fill="${hsl(35,20,45)}"/>`;for(let i=0;i<7;i++)s+=`<rect x="${20+i*42}" y="${95+r()*30}" width="14" height="18" rx="7" fill="${dark}"/>`;s+=houses(68,mid,false).slice(0,0)}
+  else if(k==="atomium"){s+=ground(155,mid);const pts=[[160,30],[110,65],[210,65],[160,95],[110,125],[210,125],[160,160],[135,95],[185,95]];pts.slice(0,7).forEach(([x,y])=>pts.slice(0,7).forEach(([a,b])=>{if(Math.hypot(x-a,y-b)<75)s+=`<line x1="${x}" y1="${y}" x2="${a}" y2="${b}" stroke="#C9D3DF" stroke-width="4"/>`}));pts.slice(0,7).forEach(([x,y])=>s+=`<circle cx="${x}" cy="${y}" r="15" fill="#DCE4EC"/><circle cx="${x-4}" cy="${y-5}" r="5" fill="#fff" opacity=".8"/>`)}
+  else if(k==="galeria"){s+=`<rect width="${W}" height="${Ht}" fill="${hsl(35,30,82)}"/><path d="M0 0 Q160 70 320 0" fill="${hsl(200,40,85)}"/>`;for(let i=0;i<9;i++)s+=`<line x1="${i*40}" y1="0" x2="160" y2="70" stroke="${hsl(35,20,60)}"/>`;for(let i=0;i<4;i++)s+=`<rect x="${10+i*80}" y="90" width="60" height="70" fill="${hsl(35,25,40)}"/><rect x="${18+i*80}" y="100" width="44" height="36" fill="#FFE3A8"/>`;s+=`<rect y="160" width="${W}" height="20" fill="${hsl(35,20,55)}"/>`}
+  else if(k==="estatua"){s+=houses(150,mid,true)+ground(150,dark)+`<rect x="140" y="110" width="40" height="40" fill="${dark}"/><circle cx="160" cy="80" r="9" fill="${hsl(40,40,40)}"/><rect x="152" y="88" width="16" height="22" rx="6" fill="${hsl(40,40,40)}"/><path d="M168 100 Q190 110 185 140" stroke="#9FE3FF" stroke-width="2" fill="none"/>`}
+  else if(k==="museo"){s+=ground(140,mid)+`<path d="M60 140 V70 L160 40 L260 70 V140Z" fill="#E9EEF3"/><path d="M60 70 L160 40 L260 70" stroke="${dark}" stroke-width="3" fill="none"/><rect x="140" y="80" width="40" height="60" fill="${hsl(200,40,70)}"/>`+`<path d="M0 140 L40 120 L80 140Z" fill="${dark}"/>`}
+  else if(k==="jardin"){s+=ground(140,hsl(120,25,30))+`<path d="M70 140 V90 Q160 20 250 90 V140Z" fill="#CFEFE3" opacity=".8" stroke="#fff"/>`;for(let i=0;i<6;i++)s+=`<line x1="${70+i*36}" y1="140" x2="160" y2="${50}" stroke="#fff" opacity=".5"/>`;for(let i=0;i<10;i++)s+=`<circle cx="${80+r()*160}" cy="${110+r()*25}" r="${6+r()*8}" fill="${hsl(110+r()*40,40,35)}"/>`}
+  else if(k==="avion"){s+=`<path d="M40 120 Q160 60 300 40" stroke="#fff" stroke-dasharray="4 6" stroke-width="2" fill="none" opacity=".8"/><g transform="translate(230 50) rotate(-18)"><path d="M0 0 H50 Q60 0 60 5 Q60 10 50 10 H0Z" fill="#fff"/><path d="M20 5 L35 -18 H42 L34 5Z M20 5 L35 28 H42 L34 5Z M2 5 L-4 -8 H3 L10 5Z" fill="#fff"/></g>`+ground(150,dark)}
+  else if(k==="luces"){s+=houses(150,dark,true)+ground(150,dark);for(let i=0;i<40;i++)s+=`<circle cx="${r()*W}" cy="${r()*140}" r="${3+r()*9}" fill="${["#FFD27A","#FF8FA3","#9FE3FF","#C6A8FF"][i%4]}" opacity="${.25+r()*.4}"/>`}
+  // nieve
+  for(let i=0;i<26;i++)s+=`<circle cx="${r()*W}" cy="${r()*Ht}" r="${r()*1.6+.6}" fill="#fff" opacity="${r()*.5+.35}"/>`;
+  return `<svg viewBox="0 0 ${W} ${Ht}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ilustración de ${it.n}">${s}</svg>`;
+}
+
+/* ---------- render ---------- */
+const $=s=>document.querySelector(s);
+let filter={type:"all",val:null};
+let votes={}; // member -> {qid: value}
+const enc=encodeURIComponent;
+function tallyText(qid,optVal){const n=Object.values(votes).filter(v=>v&&v[qid]===optVal).length;return n}
+function renderRoute(){
+  const seen=[];DAYS.forEach(d=>{const last=seen[seen.length-1];if(!last||last.city!==d.city||d.d===26)seen.push({city:d.city,from:d.d,to:d.d});else last.to=d.d});
+  $("#route").innerHTML=seen.map(s=>{const c=CITIES[s.city];const on=filter.type==="city"&&filter.val===s.city;return `<button class="stop${on?" on":""}" style="--c:${c.c}" data-city="${s.city}" aria-pressed="${on}"><div class="bar"></div><b>${c.code}</b><span>${c.name} · ${s.from===s.to?s.from:s.from+"–"+s.to} dic</span></button>`}).join("");
+  $("#route").querySelectorAll(".stop").forEach(b=>b.onclick=()=>{const v=b.dataset.city;filter=(filter.type==="city"&&filter.val===v)?{type:"all"}:{type:"city",val:v};render()});
+}
+function renderChips(){
+  const opts=[{t:"all",l:"Todo"}].concat(DAYS.map(d=>({t:"day",v:d.d,l:`${d.d} dic`,s:CITIES[d.city].code}))).concat([{t:"vote",l:"En votación"}]);
+  $("#chips").innerHTML=opts.map(o=>{const on=(o.t==="all"&&filter.type==="all")||(o.t==="day"&&filter.type==="day"&&filter.val===o.v)||(o.t==="vote"&&filter.type==="vote");return `<button class="chip${o.t==="vote"?" vote":""}" aria-pressed="${on}" data-t="${o.t}" data-v="${o.v??""}">${o.l}${o.s?`<small>${o.s}</small>`:""}</button>`}).join("");
+  $("#chips").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{const t=b.dataset.t;filter=t==="day"?{type:"day",val:+b.dataset.v}:{type:t};render();if(t!=="all")window.scrollTo({top:$("#days").getBoundingClientRect().top+scrollY-$(".filters").offsetHeight+18,behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"})});
+}
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fname=id=>(FAMILY.find(f=>f[0]===id)||[,"Alguien"])[1];
+function ynRow(key){
+  const mine=(me&&votes[me]&&votes[me][key])||null;
+  const si=FAMILY.filter(([id])=>votes[id]&&votes[id][key]==="si").map(f=>f[1]);
+  const no=FAMILY.filter(([id])=>votes[id]&&votes[id][key]==="no").map(f=>f[1]);
+  return `<div class="yn"><button class="yes" data-k="${key}" data-v="si" aria-pressed="${mine==="si"}">Sí <span>${si.length}</span></button><button class="nope" data-k="${key}" data-v="no" aria-pressed="${mine==="no"}">No <span>${no.length}</span></button></div>
+  ${si.length||no.length?`<div class="voters">${si.length?"Sí: "+si.join(", "):""}${si.length&&no.length?" · ":""}${no.length?"No: "+no.join(", "):""}</div>`:""}`;
+}
+function card(it,color){
+  const isVote=!!(it.opt||it.vote);
+  const tal=ynRow(it.id);
+  return `<article class="card${isVote?" opt":""}" style="--c:${color}">
+    <div class="scene">${photos[it.id]?`<img src="/_blob/${photos[it.id]}" alt="${it.n}" loading="lazy">`:BUILTIN.has(it.id)?`<img src="img/${it.id}.jpg" alt="${it.n}" loading="lazy" decoding="async">`:scene(it)}${isVote?`<span class="flag v">En votación</span>`:""}${assets?`<label class="up">${photos[it.id]?"Cambiar foto":"Agregar foto"}<input type="file" accept="image/*" data-id="${it.id}" id="up-${it.id}" hidden></label>`:""}${uploading===it.id?`<span class="flag up-st">Subiendo…</span>`:""}</div>
+    <div class="cbody"><h3>${it.n}</h3><p>${it.p}</p><div class="tags">${it.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>${tal}
+    <div class="links">
+      <a href="https://www.google.com/search?tbm=isch&q=${enc(it.q)}" target="_blank" rel="noopener">Fotos</a>
+      <a class="tt" href="https://www.tiktok.com/search?q=${enc(it.q)}" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.youtube.com/results?search_query=${enc(it.q)}" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=${enc(it.q)}" target="_blank" rel="noopener">Mapa</a>
+    </div></div></article>`;
+}
+function suggCard(s,color){
+  const it={id:"s"+s.id,d:s.day,k:"luces",t:"tarde",n:s.name};
+  return `<article class="card opt sug" style="--c:${color}">
+    <div class="scene">${scene(it)}<span class="flag v">Sugerencia de ${esc(fname(s.member))}</span></div>
+    <div class="cbody"><h3>${esc(s.name)}</h3>${s.note?`<p>${esc(s.note)}</p>`:""}${ynRow("s:"+s.id)}
+    <div class="links">
+      <a href="https://www.google.com/search?tbm=isch&q=${enc(s.name)}" target="_blank" rel="noopener">Fotos</a>
+      <a class="tt" href="https://www.tiktok.com/search?q=${enc(s.name)}" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=${enc(s.name)}" target="_blank" rel="noopener">Mapa</a>
+      ${me&&me===s.member&&(ONLINE||!RESULTS.suggestions.some(r=>r.id===s.id))?`<button class="del" data-del="${esc(s.id)}">Quitar</button>`:""}
+    </div></div></article>`;
+}
+function renderDays(){
+  const out=DAYS.filter(d=>filter.type==="all"||filter.type==="vote"||(filter.type==="day"&&filter.val===d.d)||(filter.type==="city"&&filter.val===d.city)).map(d=>{
+    const c=CITIES[d.city];let items=ITEMS.filter(i=>i.d===d.d);
+    if(filter.type==="vote")items=items.filter(i=>i.opt||i.vote);
+    const sugs=suggestions.filter(s=>s.day===d.d);
+    if(!items.length&&!sugs.length)return"";
+    return `<section class="day" style="--c:${c.c}" aria-label="${d.d} de diciembre">
+      <div class="ticket"><div class="date">${d.d}<small>${d.wd}</small></div>
+        <div class="tmeta"><h2>${d.title}</h2><p>${c.name}${d.d===25?" · regreso a Brujas":""}</p></div>
+        <div class="train">${d.train?`<b>${d.train[0]} → ${d.train[1]}</b>${d.train[2]}`:`<b>${c.code}</b>sin traslado`}</div></div>
+      ${d.note&&filter.type!=="vote"?`<p class="note">${d.note}</p>`:""}
+      <div class="grid">${items.map(i=>card(i,c.c)).join("")}${sugs.map(s=>suggCard(s,c.c)).join("")}</div></section>`}).join("");
+  $("#days").innerHTML=out;
+  $("#days").querySelectorAll(".yn button").forEach(b=>b.onclick=()=>vote(b.dataset.k,b.dataset.v));
+  $("#days").querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>removeSugg(b.dataset.del));
+  $("#days").querySelectorAll('.up input').forEach(inp=>inp.onchange=()=>{const f=inp.files&&inp.files[0];if(f)addPhoto(inp.dataset.id,f)});
+}
+const BUILTIN=new Set(["altstadt", "armes", "belval", "bock", "brauhaus", "choco", "corniche", "dam", "dom", "domxmas", "ehren", "engel", "fabrique", "grund", "hafen", "heinzels", "hohenzollern", "lightfest", "mudam", "mullerthal", "museumplein", "negen", "oberstadt", "pfaffenthal", "philippe", "rin", "schengen", "triangle", "wantermaart", "wanterpark", "winterparadijs", "xmasvillage"]);
+let photos={}, assets=null, uploading=null;
+async function addPhoto(itemId,file){
+  if(!assets||!db)return;uploading=itemId;renderDays();
+  try{const r=await assets.upload(file);await db.collection("fotos").doc(itemId).set({asset:r.id,at:Date.now()});photos={...photos,[itemId]:r.id}}
+  catch(e){setStatus("No se pudo subir la foto ("+(e&&e.code||"error")+").")}
+  uploading=null;renderDays();
+}
+/* ---------- votación ---------- */
+/* Resultados que Memo junta del grupo de WhatsApp y que Claude publica aquí */
+const RESULTS={updated:"",votes:{},suggestions:[]};
+let me=null; try{me=localStorage.getItem("ruta-me")}catch(e){}
+let db=null, mode="local";
+let mine={}; try{mine=JSON.parse(localStorage.getItem("ruta-mios")||"{}")||{}}catch(e){mine={}}
+let suggestions=[];
+function saveMine(){try{localStorage.setItem("ruta-mios",JSON.stringify(mine))}catch(e){}}
+function myBox(){if(!mine[me])mine[me]={votes:{...(RESULTS.votes[me]||{})},sugs:RESULTS.suggestions.filter(s=>s.member===me)};return mine[me]}
+function recompute(){
+  votes={};FAMILY.forEach(([id])=>{const v=(mine[id]&&mine[id].votes)||RESULTS.votes[id];if(v)votes[id]=v});
+  const seen=new Set();suggestions=[];
+  RESULTS.suggestions.filter(s=>!mine[s.member]).concat(...Object.values(mine).map(m=>m.sugs||[])).forEach(s=>{const key=s.member+"|"+s.name.toLowerCase();if(!seen.has(key)){seen.add(key);suggestions.push(s)}});
+}
+function renderWho(){
+  $("#who").innerHTML=`<span class="wl">Votas como</span>`+FAMILY.map(([id,l])=>`<button aria-pressed="${me===id}" data-id="${id}">${l}</button>`).join("");
+  $("#who").querySelectorAll("button").forEach(b=>b.onclick=()=>{me=b.dataset.id;try{localStorage.setItem("ruta-me",me)}catch(e){}render()});
+}
+function renderSummary(){
+  const keys=ITEMS.map(i=>({k:i.id,n:i.n,d:i.d})).concat(suggestions.map(s=>({k:"s:"+s.id,n:s.name,d:s.day,sug:true})));
+  const rows=keys.map(x=>{let si=0,no=0;FAMILY.forEach(([id])=>{const v=votes[id]&&votes[id][x.k];if(v==="si")si++;else if(v==="no")no++});return{...x,si,no}}).filter(x=>x.si||x.no).sort((a,b)=>(b.si-b.no)-(a.si-a.no)||a.d-b.d);
+  $("#summary").innerHTML=rows.length?rows.map(x=>`<div class="srow"><span class="sd">${x.d} dic</span><span class="sn">${esc(x.n)}${x.sug?' <em>sugerencia</em>':""}</span><span class="sbar"><i class="s" style="width:${x.si*20}%"></i><i class="n" style="width:${x.no*20}%"></i></span><span class="sc">${x.si} sí · ${x.no} no</span></div>`).join(""):`<p class="sub">Todavía no hay votos. Toca Sí o No en cualquier tarjeta del itinerario.</p>`;
+  const done=FAMILY.filter(([id])=>RESULTS.votes[id]&&Object.keys(RESULTS.votes[id]).length).map(f=>f[1]);
+  $("#who-done").textContent=ONLINE?((done.length?"Ya votaron: "+done.join(", ")+".":"Todavía nadie vota.")+(RESULTS.updated?" Actualizado a las "+RESULTS.updated:"")):((done.length?"Votos que ya le llegaron a Memo: "+done.join(", ")+".":"Todavía no le llegan votos a Memo.")+(RESULTS.updated?" Actualizado el "+RESULTS.updated+".":""));
+}
+function setStatus(t){$("#status").textContent=t}
+/* mensaje para WhatsApp */
+function b64(str){return btoa(unescape(encodeURIComponent(str)))}
+function pending(){
+  if(!me||!mine[me])return 0;const sent=RESULTS.votes[me]||{},cur=mine[me].votes||{};
+  const keys=new Set([...Object.keys(sent),...Object.keys(cur)]);let n=0;keys.forEach(k=>{if(sent[k]!==cur[k])n++});
+  return n+(mine[me].sugs||[]).filter(s=>!RESULTS.suggestions.some(r=>r.member===s.member&&r.name===s.name)).length;
+}
+function message(){
+  const box=mine[me]||{votes:{},sugs:[]},v=box.votes||{};
+  const nm=k=>{if(k.startsWith("s:")){const s=suggestions.find(x=>"s:"+x.id===k);return s?s.name:null}const i=ITEMS.find(x=>x.id===k);return i?i.n:null};
+  const si=Object.keys(v).filter(k=>v[k]==="si").map(nm).filter(Boolean), no=Object.keys(v).filter(k=>v[k]==="no").map(nm).filter(Boolean);
+  const sugs=box.sugs||[];
+  let t=`🎄 Votos de ${fname(me)} para la Ruta de Navidad\n\n`;
+  if(si.length)t+=`✅ Sí (${si.length}): ${si.join(", ")}\n\n`;
+  if(no.length)t+=`❌ No (${no.length}): ${no.join(", ")}\n\n`;
+  if(sugs.length)t+=`💡 Sugiero: ${sugs.map(s=>`${s.name} (${s.day} dic)`).join(", ")}\n\n`;
+  const code={m:me,v,s:sugs.map(s=>({d:s.day,n:s.name,t:s.note,id:s.id}))};
+  t+=`Código para Memo: RN1:${b64(JSON.stringify(code))}`;
+  return t;
+}
+function renderSend(){
+  const bar=$("#sendbar"),n=pending();
+  if(ONLINE||!me||!n){bar.hidden=true;return}
+  bar.hidden=false;$("#send-n").textContent=n===1?"1 cambio sin mandar":n+" cambios sin mandar";
+  $("#send-wa").href="https://wa.me/?text="+encodeURIComponent(message());
+}
+function renderVoting(){recompute();renderWho();renderSummary();renderSend();
+  $("#sg-submit").disabled=!me;
+  if(!me)setStatus("Elige quién eres para votar y sugerir.");
+  else if(ONLINE)setStatus(netMsg||("Votando como "+fname(me)+". Tus votos se guardan solos para toda la familia."));
+  else setStatus("Votando como "+fname(me)+". Cuando termines, mándale tus votos a Memo por WhatsApp con el botón de abajo.");
+}
+function addSugg(ev){
+  ev.preventDefault();if(!me)return;
+  const name=$("#sg-name").value.trim(), day=+$("#sg-day").value, note=$("#sg-note").value.trim();
+  if(!name){$("#sg-msg").textContent="Escribe qué actividad propones.";return}
+  const box=myBox();box.sugs=[...(box.sugs||[]),{id:me+"-"+Date.now().toString(36),member:me,day,name:name.slice(0,90),note:note.slice(0,240),at:Date.now()}];saveMine();
+  $("#sg-msg").textContent="Listo, ya aparece en el "+day+" de diciembre. Mándasela a Memo con el botón de abajo para que la vean todos.";
+  $("#sg-name").value="";$("#sg-note").value="";render();queueSend();
+}
+function removeSugg(id){if(!me||!mine[me])return;mine[me].sugs=(mine[me].sugs||[]).filter(s=>s.id!==id);saveMine();render();queueSend()}
+function vote(q,v){
+  if(!me){setStatus("Primero elige quién eres, arriba en la barra.");document.querySelector("#who").scrollIntoView({block:"center"});return}
+  const box=myBox(),cur={...box.votes};if(cur[q]===v)delete cur[q];else cur[q]=v;box.votes=cur;saveMine();render();queueSend();
+}
+
+/* ---------- Google Form + Sheet (GitHub Pages) ---------- */
+const CFG=window.RUTA_CONFIG||{};
+let FORM=null;
+try{
+  const u=new URL(CFG.formPrefill||"");const ids={};
+  u.searchParams.forEach((v,k)=>{if(k.startsWith("entry."))ids[v.trim().toLowerCase()]=k});
+  if(ids.quien&&ids.voto)FORM={action:u.origin+u.pathname.replace(/\/viewform$/,"/formResponse"),quien:ids.quien,voto:ids.voto};
+}catch(e){}
+const ONLINE=!!(FORM&&CFG.csvUrl);
+let netMsg="",sendTimer=null;
+function queueSend(){if(!ONLINE||!me)return;clearTimeout(sendTimer);netMsg="Guardando tu voto…";renderVoting();sendTimer=setTimeout(sendNow,1200)}
+async function sendNow(){
+  const box=mine[me];if(!box)return;
+  const payload={m:me,at:Date.now(),v:box.votes||{},s:(box.sugs||[]).map(s=>({id:s.id,d:s.day,n:s.name,t:s.note}))};
+  const body=new URLSearchParams();body.set(FORM.quien,me);body.set(FORM.voto,JSON.stringify(payload));
+  try{await fetch(FORM.action,{method:"POST",mode:"no-cors",body});box.sentAt=payload.at;saveMine();netMsg="Listo, tu voto ya se guardó. Los de los demás se actualizan cada par de minutos."}
+  catch(e){netMsg="No se pudo mandar tu voto. Revisa tu internet, lo intento de nuevo cuando votes otra vez."}
+  renderVoting();
+}
+function parseCSV(t){const rows=[];let row=[],f="",q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}else if(c==='"')q=true;else if(c===","){row.push(f);f=""}else if(c==="\n"||c==="\r"){if(c==="\r"&&t[i+1]==="\n")i++;row.push(f);rows.push(row);row=[];f=""}else f+=c}if(f||row.length){row.push(f);rows.push(row)}return rows}
+const VALID=new Set(ITEMS.map(i=>i.id));
+async function pull(){
+  try{
+    const r=await fetch(CFG.csvUrl+(CFG.csvUrl.includes("?")?"&":"?")+"t="+Date.now(),{cache:"no-store"});
+    const rows=parseCSV(await r.text());if(!rows.length)return;
+    const h=rows[0].map(x=>x.trim().toLowerCase());let iq=h.indexOf("quien"),iv=h.indexOf("voto");if(iq<0)iq=1;if(iv<0)iv=2;
+    const latest={};
+    rows.slice(1).forEach(rw=>{const m=(rw[iq]||"").trim();if(!FAMILY.some(f=>f[0]===m))return;let p;try{p=JSON.parse(rw[iv]||"")}catch(e){return}if(!p||p.m!==m)return;if(!latest[m]||(+p.at||0)>=(+latest[m].at||0))latest[m]=p});
+    const votes2={},sugs2=[];
+    Object.entries(latest).forEach(([m,p])=>{
+      const v={};Object.entries(p.v||{}).forEach(([k,val])=>{if((val==="si"||val==="no")&&(VALID.has(k)||/^s:[\w-]{1,40}$/.test(k)))v[k]=val});votes2[m]=v;
+      (Array.isArray(p.s)?p.s:[]).slice(0,30).forEach(x=>{const day=+x.d;if(!x||!DAYS.some(d=>d.d===day)||typeof x.n!=="string"||!x.n.trim())return;sugs2.push({id:String(x.id||"").replace(/[^\w-]/g,"").slice(0,40)||m+"-"+sugs2.length,member:m,day,name:x.n.slice(0,90),note:String(x.t||"").slice(0,240)})});
+      if(mine[m]&&m!==me&&(+p.at||0)>(+mine[m].sentAt||0))delete mine[m];
+      if(m===me&&mine[m]&&(+p.at||0)>(+mine[m].sentAt||0)+1000){delete mine[m]}
+    });
+    RESULTS.votes=votes2;RESULTS.suggestions=sugs2;
+    const d=new Date();RESULTS.updated=d.toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit"});
+    saveMine();render();
+  }catch(e){}
+}
+if(ONLINE){pull();setInterval(pull,60000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)pull()})}
+function render(){recompute();renderRoute();renderChips();renderDays();renderVoting()}
+$("#sg-day").innerHTML=DAYS.map(d=>`<option value="${d.d}">${d.d} dic · ${CITIES[d.city].name}</option>`).join("");
+$("#sg-form").addEventListener("submit",addSugg);
+$("#send-copy").addEventListener("click",async()=>{const t=message();try{await navigator.clipboard.writeText(t);$("#send-n").textContent="Copiado. Pégalo en el grupo."}catch(e){const ta=$("#send-text");ta.hidden=false;ta.value=t;ta.select();$("#send-n").textContent="Copia el texto de abajo."}});
+render();
+(async()=>{
+  try{db=window.claude&&await window.claude.use("db")}catch(e){db=null}
+  if(!db)return;
+  db.collection("fotos").onSnapshot(snap=>{const p={};snap.docs.forEach(d=>{const x=d.data();if(x&&typeof x.asset==="string"&&/^[0-9a-f]{32}$/.test(x.asset))p[d.id]=x.asset});photos=p;renderDays()},()=>{});
+  try{assets=await window.claude.use("assets")}catch(e){assets=null}
+  if(assets)renderDays();
+})();
+</script>
+
+</body>
+</html>
